@@ -6,7 +6,9 @@ const envConfig = require("./config")
 const passport = require('./middlewares/passport.js');
 const dbConfig = require('./db/config');
 
-
+const minimist = require("minimist")
+const args = minimist(process.argv.slice(2), {default: {port: 8080}});
+const PORT = args.port;
 
 const app = express();
 
@@ -41,7 +43,7 @@ app.set('view engine', 'ejs');
 app.use("/", apiRoutes);
 
 
-app.listen(envConfig.HOST, envConfig.PORT, () => {
-    console.log(`Servidor escuchando en http://${envConfig.HOST}:${envConfig.PORT}`);
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://${envConfig.HOST}:${PORT}`);
 });
 
